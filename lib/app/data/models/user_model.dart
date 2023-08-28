@@ -18,7 +18,7 @@ class User {
       this.nik,
       this.profilePicture});
 
-  User.fromJson(Map<String, dynamic> json) {
+  User.fromJson(json) {
     id = json['id'];
     fullName = json['full_name'];
     email = json['email'];
@@ -29,7 +29,7 @@ class User {
     profilePicture = json['profile_picture'];
   }
 
-  Map<String, dynamic> toJson() {
+  toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['full_name'] = fullName;

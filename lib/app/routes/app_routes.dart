@@ -9,6 +9,7 @@ abstract class Routes {
   static const BERANDA = _Paths.BERANDA;
   static const RIWAYAT = _Paths.RIWAYAT;
   static const PROFILE = _Paths.PROFILE;
+  static const REGISTER = _Paths.REGISTER;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const BERANDA = '/beranda';
   static const RIWAYAT = '/riwayat';
   static const PROFILE = '/profile';
+  static const REGISTER = '/register';
 }
