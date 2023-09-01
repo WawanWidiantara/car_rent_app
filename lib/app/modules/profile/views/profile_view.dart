@@ -21,7 +21,8 @@ class ProfileView extends GetView<ProfileController> {
             controller.kliklogout();
           },
           style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(ColorsRentals.cPrimary),
+              backgroundColor:
+                  const MaterialStatePropertyAll(ColorsRentals.cPrimary),
               shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)))),

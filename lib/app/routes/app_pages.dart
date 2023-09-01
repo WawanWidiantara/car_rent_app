@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/beranda/bindings/beranda_binding.dart';
 import '../modules/beranda/views/beranda_view.dart';
+import '../modules/detailcar/bindings/detailcar_binding.dart';
+import '../modules/detailcar/views/detailcar_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAILCAR,
+      page: () => const DetailcarView(),
+      binding: DetailcarBinding(),
     ),
   ];
 }

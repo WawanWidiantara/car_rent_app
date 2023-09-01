@@ -9,14 +9,14 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  // const HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (controller) {
       return Scaffold(
         body: IndexedStack(
           index: controller.tabIndex,
-          children: [
+          children: const [
             BerandaView(),
             RiwayatView(),
             ProfileView(),
@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
           type: BottomNavigationBarType.fixed,
           onTap: controller.changeTabIndex,
           currentIndex: controller.tabIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               activeIcon: Icon(
                 Icons.home,

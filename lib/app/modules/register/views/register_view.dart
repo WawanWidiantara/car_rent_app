@@ -13,7 +13,7 @@ class RegisterView extends GetView<RegisterController> {
 
     return Obx(() => Form(
           key: controller.registerFormKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.always,
           child: Scaffold(
               body: SizedBox(
             child: SingleChildScrollView(

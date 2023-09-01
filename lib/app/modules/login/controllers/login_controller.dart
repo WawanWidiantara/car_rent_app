@@ -4,13 +4,11 @@ import 'package:car_rent_app/app/data/models/user_model.dart';
 import 'package:car_rent_app/app/routes/app_pages.dart';
 import 'package:car_rent_app/constans.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
   late User user;
   final getStorage = GetStorage();
   final loginFormKey = GlobalKey<FormState>();
@@ -36,7 +34,7 @@ class LoginController extends GetxController {
     Get.snackbar(title, conntent,
         snackPosition: SnackPosition.TOP,
         colorText: Colors.white,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         backgroundColor: tipe == "err" ? Colors.red : Colors.green);
   }
 
@@ -45,14 +43,14 @@ class LoginController extends GetxController {
   }
 
   String? validateEmail(String value) {
-    if (value?.isEmpty ?? true) {
+    if (value.isEmpty) {
       return "Email tidak boleh kosong";
     }
     return null;
   }
 
   String? validatePassword(String value) {
-    if (value?.isEmpty ?? true) {
+    if (value.isEmpty) {
       return "Password tidak boleh kosong";
     }
     return null;
@@ -93,7 +91,7 @@ class LoginController extends GetxController {
           // print(response['error']['non_field_errors']);
         }
       }).catchError((err) {
-        print(err);
+        _snack("Login Invalid", "Email dan Password tidak sesuai", "err");
       });
     }
     loginFormKey.currentState!.save();
