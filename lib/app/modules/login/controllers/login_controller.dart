@@ -88,53 +88,11 @@ class LoginController extends GetxController {
           }
         } else {
           _snack("Login Invalid", "Email dan Password tidak sesuai", "err");
-          // print(response['error']['non_field_errors']);
         }
       }).catchError((err) {
-        _snack("Login Invalid", "Email dan Password tidak sesuai", "err");
+        _snack("Login Invalid", "$err", "err");
       });
     }
     loginFormKey.currentState!.save();
   }
 }
-
-//   kliklogin(String email, String password) {
-//     // print(email);
-//     final isValid = loginFormKey.currentState!.validate();
-//     if (!isValid) {
-//       return print('isra');
-//     }
-//     var url = Uri.parse("${UrlApi.baseAPI}/account/login/");
-//     var inputLogin = json.encode({
-//       "username": email,
-//       "password": password,
-//     });
-//     http
-//         .post(
-//       url,
-//       headers: <String, String>{
-//         'Content-Type': 'application/json; charset=UTF-8',
-//       },
-//       body: inputLogin,
-//     )
-//         .then((res) {
-//       if (res.statusCode == 200) {
-//         var response = json.decode(res.body);
-//         print(response['data']['user']);
-//         if (response['success'] == 1) {
-//           getStorage.write("token", response['data']['token']);
-//           var user = User.fromJson(response['data']['user']);
-//           getStorage.write('user', user.toJson());
-//           Get.offAllNamed(Routes.HOME);
-//         } else {
-//           print('err');
-//         }
-//       } else {
-//         var response = json.decode(res.body);
-//         print(response['error']['non_field_errors']);
-//       }
-//     }).catchError((err) {
-//       print(err);
-//     });
-//   }
-

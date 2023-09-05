@@ -1,12 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RiwayatController extends GetxController {
-  //TODO: Implement RiwayatController
+class RiwayatController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  late TabController controller;
+  final List<Tab> riwayatTabs = <Tab>[
+    Tab(text: "Aktif"),
+    Tab(text: "Menunggu"),
+    Tab(text: "Selesai"),
+  ];
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    controller = TabController(length: riwayatTabs.length, vsync: this);
   }
 
   @override
@@ -18,6 +25,4 @@ class RiwayatController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

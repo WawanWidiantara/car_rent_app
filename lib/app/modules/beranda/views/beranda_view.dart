@@ -10,6 +10,8 @@ class BerandaView extends GetView<BerandaController> {
   const BerandaView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final _carsC = Get.put(BerandaController());
+    // _carsC.fetchCarsData();
     return SafeArea(
       child: Scaffold(
         body: LayoutBuilder(
@@ -23,10 +25,10 @@ class BerandaView extends GetView<BerandaController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text.rich(
+                        Text.rich(
                           TextSpan(
                             text: 'Hi, ',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -34,18 +36,18 @@ class BerandaView extends GetView<BerandaController> {
                               WidgetSpan(
                                 alignment: PlaceholderAlignment.baseline,
                                 baseline: TextBaseline.alphabetic,
-                                child: Text(
-                                  'Ilham Dean',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: ColorsRentals.cPrimary),
-                                ),
+                                child: Obx(() => Text(
+                                      _carsC.user.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: ColorsRentals.cPrimary),
+                                    )),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -84,7 +86,7 @@ class BerandaView extends GetView<BerandaController> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         const Text(
@@ -94,98 +96,122 @@ class BerandaView extends GetView<BerandaController> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
+                        const SizedBox(
+                          height: 10,
                         ),
-                        SizedBox(
-                          height: constraints.maxHeight,
-                          child: GridView.count(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 4,
-                            mainAxisSpacing: 4,
-                            children: List.generate(
-                              20,
-                              (index) => Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Card(
-                                  elevation: 5,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      AspectRatio(
-                                        aspectRatio: 3.5 / 2,
-                                        child: Container(
-                                          height: 100,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                  "https://cdn.pixabay.com/photo/2018/02/01/14/09/yellow-3123271_960_720.jpg",
+                        RefreshIndicator(
+                          onRefresh: () => _carsC.fetchCarsData(),
+                          child: SizedBox(
+                            height:
+                                constraints.maxHeight - (Get.height * 1 / 5.5),
+                            child: Obx(() => GridView.count(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 4,
+                                  mainAxisSpacing: 4,
+                                  children: List.generate(
+                                    _carsC.carsList.length,
+                                    (index) => Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        elevation: 5,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            AspectRatio(
+                                              aspectRatio: 3.5 / 2,
+                                              child: Container(
+                                                height: 100,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  10)),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                        _carsC.carsList[index]
+                                                            .picture
+                                                            .toString(),
+                                                      ),
+                                                      fit: BoxFit.cover),
                                                 ),
-                                                fit: BoxFit.cover),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Container(
-                                            child: Column(
+                                              ),
+                                            ),
+                                            Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                Text(
-                                                  'BMW 3 Series',
-                                                  style: TextStyle(
-                                                      fontSize: 11,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  width: 80,
-                                                  child: FittedBox(
-                                                    child: Text(
-                                                      'Rp. 300000/hari',
-                                                      style: TextStyle(
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Text(
+                                                      _carsC
+                                                          .carsList[index].name
+                                                          .toString(),
+                                                      style: const TextStyle(
                                                           fontSize: 11,
                                                           fontWeight:
-                                                              FontWeight.w500,
-                                                          color: ColorsRentals
-                                                              .cPrimary),
+                                                              FontWeight.bold),
                                                     ),
+                                                    SizedBox(
+                                                      width: 80,
+                                                      child: FittedBox(
+                                                        child: Text(
+                                                          'Rp. ${_carsC.carsList[index].price.toString()}/hari',
+                                                          style: const TextStyle(
+                                                              fontSize: 11,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  ColorsRentals
+                                                                      .cPrimary),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    Get.toNamed(
+                                                        Routes.DETAILCAR,
+                                                        arguments: _carsC
+                                                            .carsList[index]
+                                                            .id);
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.arrow_forward_ios,
+                                                    color:
+                                                        ColorsRentals.cPrimary,
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Get.toNamed(Routes.DETAILCAR);
-                                            },
-                                            child: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: ColorsRentals.cPrimary,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                            const SizedBox(
+                                              height: 5,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
+                                )),
                           ),
-                        ),
-                        Container(
-                          height: 500,
-                          color: Colors.pink,
                         ),
                       ],
                     ),

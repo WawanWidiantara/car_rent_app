@@ -1,0 +1,14 @@
+{
+    "id": 3,
+    "name": "Kia Sportage",
+    "car_type": "SUV",
+    "price": "420000.00",
+    "color": "Blue",
+    "transmission": "A",
+    "license_plate": "STU505",
+    "passenger_capacity": 5,
+    "fuel_capacity": "64.20",
+    "description": "A versatile and spacious SUV.",
+    "picture": "https://ilhamdean.pythonanywhere.com/image/car-604019_640_kYJeLD4.jpg",
+    "is_booked": false
+}

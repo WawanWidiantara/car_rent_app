@@ -250,7 +250,7 @@ class RegisterDetailView extends GetView<RegisterController> {
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                         border: InputBorder.none,
-                        hintText: '+62 xxxx',
+                        hintText: '08 xxxx',
                         filled: true,
                         fillColor: ColorsRentals.cTextForm,
                         errorBorder: OutlineInputBorder(
@@ -331,46 +331,46 @@ class RegisterDetailView extends GetView<RegisterController> {
                     const SizedBox(
                       height: 5,
                     ),
-                    TextFormField(
-                      autofocus: false,
-                      // textAlign: TextAlign.center,
-                      textAlignVertical: TextAlignVertical.center,
-                      onTap: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        controller.getImageKTP(ImageSource.camera);
-                      },
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: ColorsRentals.cTextGrey,
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: controller.selectedKtp.value == ""
-                            ? 'Unggah foto KTP'
-                            : 'Unggah ulang',
-                        filled: true,
-                        fillColor: ColorsRentals.cTextForm,
-                        errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: ColorsRentals.cTextForm),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: ColorsRentals.cTextForm),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        prefixIcon: const Padding(
-                          padding: EdgeInsetsDirectional.only(start: 100),
-                          child: Icon(Icons.upload),
-                        ),
-                        prefixIconColor: ColorsRentals.cTextGrey,
-                      ),
-                    ),
+                    Obx(() => TextFormField(
+                          autofocus: false,
+                          // textAlign: TextAlign.center,
+                          textAlignVertical: TextAlignVertical.center,
+                          onTap: () {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            controller.getImageKTP(ImageSource.camera);
+                          },
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: ColorsRentals.cTextGrey,
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: controller.selectedKtp.value == ""
+                                ? 'Unggah foto KTP'
+                                : 'Unggah ulang',
+                            filled: true,
+                            fillColor: ColorsRentals.cTextForm,
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: ColorsRentals.cTextForm),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: ColorsRentals.cTextForm),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            prefixIcon: const Padding(
+                              padding: EdgeInsetsDirectional.only(start: 100),
+                              child: Icon(Icons.upload),
+                            ),
+                            prefixIconColor: ColorsRentals.cTextGrey,
+                          ),
+                        )),
                     const SizedBox(
                       height: 10,
                     ),
@@ -400,45 +400,45 @@ class RegisterDetailView extends GetView<RegisterController> {
                     const SizedBox(
                       height: 5,
                     ),
-                    TextFormField(
-                      autofocus: false,
-                      textAlignVertical: TextAlignVertical.center,
-                      onTap: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        controller.getImageSIM(ImageSource.camera);
-                      },
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: ColorsRentals.cTextGrey,
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: controller.selectedSim.value == ""
-                            ? 'Unggah foto SIM'
-                            : 'Unggah ulang',
-                        filled: true,
-                        fillColor: ColorsRentals.cTextForm,
-                        errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.red),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: ColorsRentals.cTextForm),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: ColorsRentals.cTextForm),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        prefixIcon: const Padding(
-                          padding: EdgeInsetsDirectional.only(start: 100),
-                          child: Icon(Icons.upload),
-                        ),
-                        prefixIconColor: ColorsRentals.cTextGrey,
-                      ),
-                    ),
+                    Obx(() => TextFormField(
+                          autofocus: false,
+                          textAlignVertical: TextAlignVertical.center,
+                          onTap: () {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            controller.getImageSIM(ImageSource.camera);
+                          },
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: ColorsRentals.cTextGrey,
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: controller.selectedSim.value == ""
+                                ? 'Unggah foto SIM'
+                                : 'Unggah ulang',
+                            filled: true,
+                            fillColor: ColorsRentals.cTextForm,
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: ColorsRentals.cTextForm),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: ColorsRentals.cTextForm),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            prefixIcon: const Padding(
+                              padding: EdgeInsetsDirectional.only(start: 100),
+                              child: Icon(Icons.upload),
+                            ),
+                            prefixIconColor: ColorsRentals.cTextGrey,
+                          ),
+                        )),
                     const SizedBox(
                       height: 10,
                     ),

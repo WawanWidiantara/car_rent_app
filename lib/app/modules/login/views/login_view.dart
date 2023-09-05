@@ -14,7 +14,6 @@ class LoginView extends GetView<LoginController> {
 
     return Obx(() => Form(
           key: controller.loginFormKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Scaffold(
               body: SizedBox(
             child: SingleChildScrollView(

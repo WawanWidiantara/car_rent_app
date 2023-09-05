@@ -30,33 +30,33 @@ class HomeView extends GetView<HomeController> {
           items: const [
             BottomNavigationBarItem(
               activeIcon: Icon(
-                Icons.home,
+                Icons.home_outlined,
                 color: ColorsRentals.cPrimary,
               ),
               icon: Icon(
-                Icons.home,
+                Icons.home_outlined,
                 color: ColorsRentals.cBgIcon,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               activeIcon: Icon(
-                Icons.money,
+                Icons.history,
                 color: ColorsRentals.cPrimary,
               ),
               icon: Icon(
-                Icons.money,
+                Icons.history,
                 color: ColorsRentals.cBgIcon,
               ),
               label: 'Riwayat',
             ),
             BottomNavigationBarItem(
               activeIcon: Icon(
-                Icons.brightness_1_rounded,
+                Icons.account_circle_outlined,
                 color: ColorsRentals.cPrimary,
               ),
               icon: Icon(
-                Icons.brightness_1_rounded,
+                Icons.account_circle_outlined,
                 color: ColorsRentals.cBgIcon,
               ),
               label: 'Profile',

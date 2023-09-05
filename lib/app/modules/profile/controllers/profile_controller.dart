@@ -1,45 +1,62 @@
 import 'package:car_rent_app/app/modules/login/controllers/login_controller.dart';
 import 'package:car_rent_app/app/routes/app_pages.dart';
 import 'package:car_rent_app/constans.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class ProfileController extends GetxController {
   final loginC = Get.put(LoginController());
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  var userData = {}.obs;
+  var picName = ''.obs;
+  var isEdit = false.obs;
 
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
+  final profileFormKey = GlobalKey<FormState>();
+  late TextEditingController fullNameController,
+      emailController,
+      nikController,
+      phoneController,
+      genderController,
+      dobController;
 
-  // kliklogout() {
-  //   var url = Uri.parse(UrlApi.baseAPI + "/account/logout/");
-  //   var token = loginC.getStorage.read("token");
-  //   http.get(
-  //     url,
-  //     headers: {
-  //       'Authorization': 'Token $token',
-  //     },
-  //   ).then((res) {
-  //     if (res.statusCode == 200) {
-  //       loginC.getStorage.write('token', '');
-  //       Get.offAllNamed(Routes.LOGIN);
-  //     } else {
-  //       print(token);
-  //     }
-  //   }).catchError((err) {
-  //     print(err);
-  //   });
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    fullNameController = TextEditingController();
+    emailController = TextEditingController();
+    nikController = TextEditingController();
+    phoneController = TextEditingController();
+    genderController = TextEditingController();
+    dobController = TextEditingController();
+    update();
+  }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onReady() {
+    super.onReady();
+    userData.value = loginC.getStorage.read('user');
+    fullNameController.text = userData["full_name"];
+    picName.value = userData["full_name"];
+    emailController.text = userData["email"];
+    nikController.text = userData["nik"];
+    phoneController.text = userData["phone_number"];
+    genderController.text =
+        userData["gender"] == "laki-laki" ? "Laki-laki" : "Perempuan";
+    var dobTime = DateTime.parse(userData["birth_date"]);
+    dobController.text = DateFormat('dd MMMM yyyy').format(dobTime);
+    update();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
+  setState() {
+    isEdit(!isEdit.value);
+    print(isEdit.value);
+  }
 
   kliklogout() async {
     var url = Uri.parse("${UrlApi.baseAPI}/account/logout/");
@@ -51,10 +68,11 @@ class ProfileController extends GetxController {
     );
     if (response.statusCode == 204) {
       loginC.getStorage.write('token', '');
+      loginC.getStorage.write('user', '');
       Get.offAllNamed(Routes.LOGIN);
-      // print('success');
+      print('success');
     } else {
-      // print(response.statusCode);
+      print(response.statusCode);
     }
   }
 }

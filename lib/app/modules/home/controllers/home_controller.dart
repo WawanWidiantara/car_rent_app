@@ -7,15 +7,18 @@ class HomeController extends GetxController {
     tabIndex = index;
     update();
   }
-//   @override
-//   void onInit() {
-//     super.onInit();
-//   }
 
-//   @override
-//   void onReady() {
-//     super.onReady();
-//   }
+  @override
+  void onInit() {
+    super.onInit();
+    update();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    update();
+  }
 
 //   @override
 //   void onClose() {

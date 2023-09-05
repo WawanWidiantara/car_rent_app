@@ -10,6 +10,9 @@ class ColorsRentals {
   static const Color cBgIcon = Color(0xFF2C2C2C);
   static const Color cTextGrey = Color(0xFF8996A4);
   static const Color cTextForm = Color(0xFFF2F2F2);
+  static const Color cYellow = Color(0xFFFFD873);
+  static const Color cGreen = Color(0xFF44C961);
+  static const Color cRed = Color(0xFFA92F2F);
 }
 
 class IconsRental {
