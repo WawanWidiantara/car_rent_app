@@ -1,3 +1,4 @@
+import 'package:car_rent_app/app/modules/register/views/otp_view.dart';
 import 'package:car_rent_app/app/routes/app_pages.dart';
 import 'package:car_rent_app/constans.dart';
 import 'package:flutter/material.dart';

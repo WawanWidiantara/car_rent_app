@@ -1,6 +1,7 @@
 {
     "id": 1,
     "name": "Toyota Camry",
+    "car_type": "Toyota Camry",
     "price": "40000.00",
     "picture": null
 }

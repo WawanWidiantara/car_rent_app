@@ -10,6 +10,7 @@ class BerandaView extends GetView<BerandaController> {
   const BerandaView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _carsC = Get.put(BerandaController());
     // _carsC.fetchCarsData();
     return SafeArea(

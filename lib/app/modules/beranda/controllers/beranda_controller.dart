@@ -39,7 +39,7 @@ class BerandaController extends GetxController {
     isLoading(false);
     try {
       var url = Uri.parse(
-          "${UrlApi.baseAPI}/api/cars/?is_booked=False&&fields=id,name,price,picture");
+          "${UrlApi.baseAPI}/api/cars/?is_booked=False&&fields=id,name,price,picture,car_type");
 
       final response = await http.get(url, headers: {
         'Authorization': 'Token ${loginC.getStorage.read("token")}',

@@ -7,6 +7,7 @@ class DetailcarView extends GetView<DetailcarController> {
   const DetailcarView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _carsDetetailC = Get.put(DetailcarController());
 
     return Scaffold(

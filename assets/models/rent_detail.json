@@ -1,0 +1,11 @@
+{
+    "id": 16,
+    "customer": 1,
+    "car": 6,
+    "status": "pending",
+    "start_date": "2023-09-05",
+    "end_date": "2023-09-05",
+    "total_cost": 0,
+    "total_days": 0,
+    "late_fee": 0
+}

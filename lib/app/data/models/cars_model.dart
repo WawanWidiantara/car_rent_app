@@ -1,6 +1,7 @@
 class Cars {
   int? id;
   String? name;
+  String? carType;
   int? price;
   dynamic picture;
 
@@ -9,6 +10,7 @@ class Cars {
   Cars.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    carType = json['car_type'];
     price = json['price'];
     picture = json['picture'];
   }
@@ -17,6 +19,7 @@ class Cars {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['car_type'] = carType;
     data['price'] = price;
     data['picture'] = picture;
     return data;

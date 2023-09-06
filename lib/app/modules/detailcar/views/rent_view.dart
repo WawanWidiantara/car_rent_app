@@ -8,6 +8,7 @@ class RentView extends GetView {
   const RentView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _carsDetetailC = Get.put(DetailcarController());
 
     return Scaffold(
@@ -227,22 +228,22 @@ class RentView extends GetView {
                               ),
                               InkWell(
                                 onTap: () => _carsDetetailC.launchURL(),
-                                child: Text(
+                                child: const Text(
                                   "Lihat di maps",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
                                       color: ColorsRentals.cPrimary),
                                 ),
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 15),
                               Obx(() => Text(
                                     'Rp. ${_carsDetetailC.carsDetail["price"] * _carsDetetailC.rentDuration.value}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700),
                                   )),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                             ],
                           ),
                         ],
@@ -278,7 +279,7 @@ class RentView extends GetView {
                       iconColor: Colors.black,
                       backgroundColor: ColorsRentals.cYellow,
                       collapsedBackgroundColor: ColorsRentals.cYellow,
-                      childrenPadding: EdgeInsets.fromLTRB(20, 5, 20, 20),
+                      childrenPadding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
                       children: const [
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
@@ -287,7 +288,7 @@ class RentView extends GetView {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 SizedBox(

@@ -78,11 +78,8 @@ class RegisterDetailView extends GetView<RegisterController> {
                     TextFormField(
                       autofocus: false,
                       controller: controller.fullNameController,
-                      onSaved: (value) {
-                        controller.fullName = value!;
-                      },
                       validator: (value) {
-                        return controller.validateEmail(value!);
+                        return controller.validateName(value!);
                       },
                       style: const TextStyle(
                         fontSize: 12,
@@ -126,7 +123,7 @@ class RegisterDetailView extends GetView<RegisterController> {
                     DropdownButtonFormField(
                       items: const [
                         DropdownMenuItem(
-                            value: "Laki-laki",
+                            value: "laki-laki",
                             child: Text("Laki-laki",
                                 style: TextStyle(
                                   fontSize: 12,
@@ -134,7 +131,7 @@ class RegisterDetailView extends GetView<RegisterController> {
                                   color: ColorsRentals.cTextGrey,
                                 ))),
                         DropdownMenuItem(
-                            value: "Perempuan",
+                            value: "erempuan",
                             child: Text("Perempuan",
                                 style: TextStyle(
                                   fontSize: 12,
@@ -185,6 +182,9 @@ class RegisterDetailView extends GetView<RegisterController> {
                       autofocus: false,
                       controller: controller.dobController,
                       textAlignVertical: TextAlignVertical.center,
+                      validator: (value) {
+                        return controller.validateDOB(value!);
+                      },
                       onTap: () {
                         FocusScope.of(context).requestFocus(FocusNode());
                         controller.chooseDate();
@@ -236,13 +236,10 @@ class RegisterDetailView extends GetView<RegisterController> {
                     TextFormField(
                       autofocus: false,
                       controller: controller.phoneController,
-                      keyboardType: TextInputType.number,
-                      // onSaved: (value) {
-                      //   controller.email = value!;
-                      // },
-                      // validator: (value) {
-                      //   return controller.validateEmail(value!);
-                      // },
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        return controller.validatePhone(value!);
+                      },
                       style: const TextStyle(
                         fontSize: 12,
                         color: ColorsRentals.cTextGrey,
@@ -286,12 +283,9 @@ class RegisterDetailView extends GetView<RegisterController> {
                       autofocus: false,
                       controller: controller.nikController,
                       keyboardType: TextInputType.number,
-                      // onSaved: (value) {
-                      //   controller.email = value!;
-                      // },
-                      // validator: (value) {
-                      //   return controller.validateEmail(value!);
-                      // },
+                      validator: (value) {
+                        return controller.validateNIK(value!);
+                      },
                       style: const TextStyle(
                         fontSize: 12,
                         color: ColorsRentals.cTextGrey,
@@ -333,7 +327,10 @@ class RegisterDetailView extends GetView<RegisterController> {
                     ),
                     Obx(() => TextFormField(
                           autofocus: false,
-                          // textAlign: TextAlign.center,
+                          controller: controller.ktpController,
+                          validator: (value) {
+                            return controller.validateKTP(value!);
+                          },
                           textAlignVertical: TextAlignVertical.center,
                           onTap: () {
                             FocusScope.of(context).requestFocus(FocusNode());
@@ -403,6 +400,10 @@ class RegisterDetailView extends GetView<RegisterController> {
                     Obx(() => TextFormField(
                           autofocus: false,
                           textAlignVertical: TextAlignVertical.center,
+                          controller: controller.simController,
+                          validator: (value) {
+                            return controller.validateSIM(value!);
+                          },
                           onTap: () {
                             FocusScope.of(context).requestFocus(FocusNode());
                             controller.getImageSIM(ImageSource.camera);
@@ -469,9 +470,9 @@ class RegisterDetailView extends GetView<RegisterController> {
                                     borderRadius: BorderRadius.circular(10)))),
                         onPressed: () {
                           FocusScope.of(context).unfocus();
-                          // controller.checkLogin();
+                          controller.uploadDataRegistrasi();
                         },
-                        child: const Text("Masuk"),
+                        child: const Text("Daftar"),
                       ),
                     ),
                     const SizedBox(

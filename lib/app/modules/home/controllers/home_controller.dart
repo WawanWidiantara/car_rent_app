@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   var tabIndex = 0;
+  var idTab = Get.arguments;
 
   void changeTabIndex(int index) {
     tabIndex = index;
@@ -16,6 +17,12 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
+    if (idTab == null) {
+      changeTabIndex(tabIndex);
+    } else {
+      changeTabIndex(idTab);
+      idTab = null;
+    }
     super.onReady();
     update();
   }

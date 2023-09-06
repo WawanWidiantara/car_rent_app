@@ -210,7 +210,7 @@ class RegisterView extends GetView<RegisterController> {
                                       borderRadius:
                                           BorderRadius.circular(10)))),
                           onPressed: () {
-                            controller.kliklogin(
+                            controller.klikSelanjutnya(
                                 controller.emailController.text,
                                 controller.passwordController.text);
                             FocusScope.of(context).unfocus();
