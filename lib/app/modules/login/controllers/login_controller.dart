@@ -16,6 +16,7 @@ class LoginController extends GetxController {
   RxBool isObscurePassword = true.obs;
   var email = '';
   var password = '';
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -59,6 +60,7 @@ class LoginController extends GetxController {
   kliklogin(String email, String password) {
     final isValid = loginFormKey.currentState!.validate();
     if (isValid) {
+      isLoading(true);
       var url = Uri.parse("${UrlApi.baseAPI}/account/login/");
       var inputLogin = json.encode({
         "username": email,
@@ -82,15 +84,19 @@ class LoginController extends GetxController {
             getStorage.write('user', user.toJson());
             emailController.clear();
             passwordController.clear();
+            isLoading(false);
             Get.offAllNamed(Routes.HOME);
           } else {
+            isLoading(false);
             _snack("Login Invalid", "Email dan Password tidak sesuai", "err");
           }
         } else {
           _snack("Login Invalid", "Email dan Password tidak sesuai", "err");
+          isLoading(false);
         }
       }).catchError((err) {
         _snack("Login Invalid", "$err", "err");
+        isLoading(false);
       });
     }
     loginFormKey.currentState!.save();

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:car_rent_app/app/data/models/cars_detail_model.dart';
 import 'package:car_rent_app/app/modules/detailcar/views/rent_view.dart';
 import 'package:car_rent_app/app/modules/login/controllers/login_controller.dart';
+import 'package:car_rent_app/app/modules/riwayat/views/detail_riwayat_view.dart';
 import 'package:car_rent_app/app/routes/app_pages.dart';
 import 'package:car_rent_app/constans.dart';
 import 'package:flutter/material.dart';
@@ -196,6 +197,8 @@ class DetailcarController extends GetxController {
       if (res.statusCode == 201) {
         var response = json.decode(res.body);
         if (response['success'] == 1) {
+          var idInvoice = response['data']['id'];
+          print(idInvoice);
           update();
           Get.offAllNamed(Routes.HOME);
           return showDialog(
@@ -255,7 +258,10 @@ class DetailcarController extends GetxController {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)))),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.to(() => DetailRiwayatView(),
+                                            arguments: [idInvoice, 'pending']);
+                                      },
                                       child: const Text("Lihat Pesanan")),
                                 )
                               ],

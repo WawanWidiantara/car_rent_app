@@ -1,6 +1,7 @@
 import 'package:car_rent_app/app/modules/riwayat/views/aktif_view.dart';
 import 'package:car_rent_app/app/modules/riwayat/views/menunggu_view.dart';
 import 'package:car_rent_app/app/modules/riwayat/views/selesai_view.dart';
+import 'package:car_rent_app/constans.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -12,33 +13,49 @@ class RiwayatView extends GetView<RiwayatController> {
   @override
   Widget build(BuildContext context) {
     final _tabC = Get.put(RiwayatController());
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('RiwayatView'),
-          centerTitle: true,
-        ),
-        body: Column(
-          children: [
-            TabBar(
-              controller: _tabC.controller,
-              tabs: _tabC.riwayatTabs,
-              labelColor: Colors.amber,
-              unselectedLabelColor: Colors.black,
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(
-                  width: 3,
-                  color: Colors.amber,
-                ),
-              ),
-              labelStyle: TextStyle(fontWeight: FontWeight.bold),
-              unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+    return SafeArea(
+      child: Scaffold(
+          // appBar: AppBar(
+          //   title: const Text('RiwayatView'),
+          //   centerTitle: true,
+          // ),
+          body: Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          const Text(
+            "Riwayat",
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
             ),
-            Expanded(
-                child: TabBarView(
-              controller: _tabC.controller,
-              children: [AktifView(), MenungguView(), SelesaiView()],
-            ))
-          ],
-        ));
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          TabBar(
+            controller: _tabC.controller,
+            tabs: _tabC.riwayatTabs,
+            labelColor: ColorsRentals.cPrimary,
+            unselectedLabelColor: Colors.black,
+            indicator: const UnderlineTabIndicator(
+              borderSide: BorderSide(
+                width: 3,
+                color: ColorsRentals.cPrimary,
+              ),
+            ),
+            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+            unselectedLabelStyle:
+                const TextStyle(fontWeight: FontWeight.normal),
+          ),
+          Expanded(
+              child: TabBarView(
+            controller: _tabC.controller,
+            children: const [AktifView(), MenungguView(), SelesaiView()],
+          ))
+        ],
+      )),
+    );
   }
 }

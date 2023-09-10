@@ -2,8 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:car_rent_app/app/data/models/cars_model.dart';
-import 'package:car_rent_app/app/data/models/rent_detail_model.dart';
+import 'package:car_rent_app/app/data/models/rent_model.dart';
 import 'package:car_rent_app/app/modules/login/controllers/login_controller.dart';
 import 'package:car_rent_app/constans.dart';
 import 'package:flutter/material.dart';
@@ -23,167 +22,86 @@ class RiwayatController extends GetxController
   var user = "".obs;
   var isLoading = true.obs;
   var isError = false.obs;
-  var errmsg = "".obs;
-  var carsList = <Cars>[].obs;
-  var riwayatList = <RentDetail>[].obs;
-  var carViews = {}.obs;
+
+  var historyList = <Rent>[].obs;
+  var activeHistoryList = <Rent>[].obs;
+  var pendingHistoryList = <Rent>[].obs;
+  var finishHistoryList = <Rent>[].obs;
   var idSingleCar = 0.obs;
-  var idSingleCarList = [].obs;
+  var singleHistory = {}.obs;
 
   @override
   void onInit() {
     super.onInit();
     controller = TabController(length: riwayatTabs.length, vsync: this);
+    fetchHistory('pending');
+    fetchHistory('selesai');
+    fetchHistory('aktif');
     update();
   }
 
   @override
   void onReady() {
     super.onReady();
-    fetchCarsData();
-    fetchRiwayatData('pending');
+    fetchHistory('pending');
+    fetchHistory('aktif');
+    fetchHistory('selesai');
     update();
   }
 
   @override
   void onClose() {
+    Get.delete<RiwayatController>();
     super.onClose();
   }
 
-  Future fetchCarsData() async {
-    isLoading(false);
-    try {
-      var url = Uri.parse(
-          "${UrlApi.baseAPI}/api/cars/?is_booked=False&&fields=id,name,price,picture,car_type");
-
-      final response = await http.get(url, headers: {
-        'Authorization': 'Token ${loginC.getStorage.read("token")}',
-      });
+  Future fetchHistory(String status) async {
+    var url = Uri.parse("${UrlApi.baseAPI}/api/rentals/?status=$status");
+    final response = await http.get(url, headers: {
+      'Authorization': 'Token ${loginC.getStorage.read("token")}',
+    });
+    if (response.statusCode == 200) {
       var result = json.decode(response.body);
+
       final jsonItems = result['data'].cast<Map<String, dynamic>>();
-      carsList.value = jsonItems.map<Cars>((json) {
-        return Cars.fromJson(json);
+      historyList.value = jsonItems.map<Rent>((json) {
+        return Rent.fromJson(json);
       }).toList();
-      update(carsList);
-      isLoading(false);
-      isError(false);
       update();
-      return carsList;
-    } catch (e) {
-      isLoading(false);
-      isError(true);
-      errmsg(e.toString());
-      throw Exception(e);
+
+      if (status == 'aktif') {
+        activeHistoryList.value = jsonItems.map<Rent>((json) {
+          return Rent.fromJson(json);
+        }).toList();
+        update();
+      } else if (status == 'pending') {
+        pendingHistoryList.value = jsonItems.map<Rent>((json) {
+          return Rent.fromJson(json);
+        }).toList();
+        update();
+      } else {
+        finishHistoryList.value = jsonItems.map<Rent>((json) {
+          return Rent.fromJson(json);
+        }).toList();
+        update();
+      }
+    } else {
+      print(response.reasonPhrase);
     }
   }
 
-  Future fetchRiwayatData(status) async {
-    isLoading(false);
-    try {
-      var url = Uri.parse(
-          "${UrlApi.baseAPI}/api/rentals/?customer=1&status=${status}");
-      final response = await http.get(url, headers: {
-        'Authorization': 'Token ${loginC.getStorage.read("token")}',
-      });
+  Future fetshSingleHistory(idInvoice) async {
+    var url = Uri.parse("${UrlApi.baseAPI}/api/rentals/${idInvoice[0]}/");
+    final response = await http.get(url, headers: {
+      'Authorization': 'Token ${loginC.getStorage.read("token")}',
+    });
+    if (response.statusCode == 200) {
       var result = json.decode(response.body);
-      final jsonItems = result['data'].cast<Map<String, dynamic>>();
-      riwayatList.value = jsonItems.map<RentDetail>((json) {
-        return RentDetail.fromJson(json);
-      }).toList();
-      print(riwayatList[0].car);
-      isLoading(false);
-      isError(false);
+      singleHistory.value = result['data'];
+      print(singleHistory.value['car']['name'].toString());
       update();
-    } catch (e) {
-      isLoading(false);
-      isError(true);
-      errmsg(e.toString());
-      throw Exception(e);
-    }
-  }
-
-  cardView() {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AspectRatio(
-            aspectRatio: 3 / 1.5,
-            child: Container(
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-                image: DecorationImage(
-                    image: NetworkImage(
-                      carViews.value['picture'].toString(),
-                    ),
-                    fit: BoxFit.cover),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      carViews.value['name'].toString(),
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold),
-                    ),
-                    const Text(
-                      "INVOICE :",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  carViews.value['car_type'].toString(),
-                  style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                      color: ColorsRentals.cPrimary),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 2,
-          )
-        ],
-      ),
-    );
-  }
-
-  singleCar(idCar) async {
-    isLoading(false);
-    try {
-      var url = Uri.parse("${UrlApi.baseAPI}/api/cars/$idCar/");
-
-      final response = await http.get(url, headers: {
-        'Authorization': 'Token ${loginC.getStorage.read("token")}',
-      });
-      var result = json.decode(response.body);
-      carViews.value = result['data'];
-      isLoading(false);
-      isError(false);
-    } catch (e) {
-      isLoading(false);
-      isError(true);
-      errmsg(e.toString());
-      throw Exception(e);
+    } else {
+      print(response.reasonPhrase);
     }
   }
 }

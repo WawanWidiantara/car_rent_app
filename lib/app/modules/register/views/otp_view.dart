@@ -1,5 +1,4 @@
 import 'package:car_rent_app/app/modules/register/controllers/register_controller.dart';
-import 'package:car_rent_app/app/routes/app_pages.dart';
 import 'package:car_rent_app/constans.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';

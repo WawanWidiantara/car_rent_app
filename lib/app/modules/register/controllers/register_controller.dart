@@ -36,6 +36,7 @@ class RegisterController extends GetxController {
 
   RxBool isObscurePassword = true.obs;
   RxBool isObscurePassword2 = true.obs;
+  RxBool isLoading = false.obs;
 
   var email = '';
   var password = '';
@@ -226,6 +227,8 @@ class RegisterController extends GetxController {
     final isValid = detailRegisterFormKey.currentState!.validate();
 
     if (isValid) {
+      isLoading(true);
+
       var url = Uri.parse("${UrlApi.baseAPI}/account/register/");
       var request = http.MultipartRequest("POST", url);
       var headers = {
@@ -260,8 +263,10 @@ class RegisterController extends GetxController {
             "Berhasil Mendaftar",
             "Data anda berhasil didaftarkan, masukkan otp untuk verifikasi akun",
             "suc");
+        isLoading(false);
         Get.off(const OtpView());
       } else {
+        isLoading(false);
         _snack("Gagal Mendaftar", "${response.reasonPhrase}", "err");
       }
     }

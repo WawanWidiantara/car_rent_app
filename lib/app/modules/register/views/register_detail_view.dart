@@ -12,7 +12,7 @@ class RegisterDetailView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RegisterController());
-    return Form(
+    return Obx(() => Form(
         key: controller.detailRegisterFormKey,
         child: Scaffold(
           appBar: AppBar(
@@ -457,24 +457,28 @@ class RegisterDetailView extends GetView<RegisterController> {
                             ),
                     ),
                     const SizedBox(height: 50),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: const MaterialStatePropertyAll(
-                                ColorsRentals.cPrimary),
-                            shape: MaterialStatePropertyAll<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)))),
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          controller.uploadDataRegistrasi();
-                        },
-                        child: const Text("Daftar"),
-                      ),
-                    ),
+                    controller.isLoading.value == true
+                        ? Center(child: CircularProgressIndicator())
+                        : SizedBox(
+                            width: double.infinity,
+                            height: 60,
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      const MaterialStatePropertyAll(
+                                          ColorsRentals.cPrimary),
+                                  shape: MaterialStatePropertyAll<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)))),
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                                controller.uploadDataRegistrasi();
+                              },
+                              child: const Text("Daftar"),
+                            ),
+                          ),
                     const SizedBox(
                       height: 50,
                     )
@@ -483,6 +487,6 @@ class RegisterDetailView extends GetView<RegisterController> {
               ),
             ),
           ),
-        ));
+        )));
   }
 }

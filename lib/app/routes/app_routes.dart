@@ -12,6 +12,7 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const IMAGEPICKER = _Paths.IMAGEPICKER;
   static const DETAILCAR = _Paths.DETAILCAR;
+  static const DETAIL_RIWAYAT = _Paths.DETAIL_RIWAYAT;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const IMAGEPICKER = '/imagepicker';
   static const DETAILCAR = '/detailcar';
+  static const DETAIL_RIWAYAT = '/detail-riwayat';
 }

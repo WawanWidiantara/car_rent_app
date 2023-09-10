@@ -13,12 +13,13 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     final controller = Get.put(ProfileController());
     return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
-            child: Form(
+        child: Scaffold(
+      body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+          child: Obx(
+            () => Form(
               // key: controller.profileFormKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,42 +344,44 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          backgroundColor: const MaterialStatePropertyAll(
-                              Colors.transparent),
-                          shape:
-                              MaterialStatePropertyAll<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: ColorsRentals.cRed,
+                  controller.isLoading.value == true
+                      ? Center(child: CircularProgressIndicator())
+                      : SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                elevation: MaterialStateProperty.all(0),
+                                backgroundColor: const MaterialStatePropertyAll(
+                                    Colors.transparent),
+                                shape: MaterialStatePropertyAll<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                    color: ColorsRentals.cRed,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ))),
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+                              controller.kliklogout();
+                            },
+                            child: const Text(
+                              "Keluar",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: ColorsRentals.cRed,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(10),
-                          ))),
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        controller.kliklogout();
-                      },
-                      child: const Text(
-                        "Keluar",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          color: ColorsRentals.cRed,
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
-    );
+    ));
   }
 }

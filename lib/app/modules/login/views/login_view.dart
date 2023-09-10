@@ -1,4 +1,3 @@
-import 'package:car_rent_app/app/modules/register/views/otp_view.dart';
 import 'package:car_rent_app/app/routes/app_pages.dart';
 import 'package:car_rent_app/constans.dart';
 import 'package:flutter/material.dart';
@@ -144,31 +143,34 @@ class LoginView extends GetView<LoginController> {
                     const SizedBox(
                       height: 60,
                     ),
-                    SizedBox(
-                      width: 340,
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: const MaterialStatePropertyAll(
-                                  ColorsRentals.cPrimary),
-                              shape: MaterialStatePropertyAll<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(10)))),
-                          onPressed: () {
-                            controller.kliklogin(
-                                controller.emailController.text,
-                                controller.passwordController.text);
-                            FocusScope.of(context).unfocus();
-                            // controller.checkLogin();
-                          },
-                          child: const Text("Masuk"),
-                        ),
-                      ),
-                    ),
+                    controller.isLoading.value == true
+                        ? CircularProgressIndicator()
+                        : SizedBox(
+                            width: 340,
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        const MaterialStatePropertyAll(
+                                            ColorsRentals.cPrimary),
+                                    shape: MaterialStatePropertyAll<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)))),
+                                onPressed: () {
+                                  controller.kliklogin(
+                                      controller.emailController.text,
+                                      controller.passwordController.text);
+                                  FocusScope.of(context).unfocus();
+                                  // controller.checkLogin();
+                                },
+                                child: const Text("Masuk"),
+                              ),
+                            ),
+                          ),
                     const SizedBox(
                       height: 80,
                     ),
@@ -201,7 +203,7 @@ class LoginView extends GetView<LoginController> {
                     ),
                     const SizedBox(
                       height: 20,
-                    )
+                    ),
                   ],
                 ),
               ),

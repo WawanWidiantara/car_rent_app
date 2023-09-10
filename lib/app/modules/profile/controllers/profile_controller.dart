@@ -14,6 +14,7 @@ class ProfileController extends GetxController with StateMixin {
   final loginC = Get.put(LoginController());
   var userData = {}.obs;
   var picName = ''.obs;
+  RxBool isLoading = false.obs;
 
   final profileFormKey = GlobalKey<FormState>();
   late TextEditingController fullNameController,
@@ -86,6 +87,7 @@ class ProfileController extends GetxController with StateMixin {
   }
 
   kliklogout() async {
+    isLoading(true);
     var url = Uri.parse("${UrlApi.baseAPI}/account/logout/");
     var token = 'Token ${loginC.getStorage.read("token")}';
     // loginC.getStorage.write("token", '');
@@ -96,9 +98,11 @@ class ProfileController extends GetxController with StateMixin {
     if (response.statusCode == 204) {
       loginC.getStorage.write('token', '');
       loginC.getStorage.write('user', '');
+      isLoading(false);
       Get.offAllNamed(Routes.LOGIN);
       _snack("Logout Berhasil", "Anda berhasil logout", "suc");
     } else {
+      isLoading(false);
       _snack("Logout Failed", "Status code: ${response.statusCode}", "err");
     }
   }
@@ -109,6 +113,7 @@ class ProfileController extends GetxController with StateMixin {
     final idUser = userData['id'];
     change(null, status: RxStatus.loading());
     if (isValid) {
+      isLoading(true);
       var url = Uri.parse("${UrlApi.baseAPI}/account/userupdate/$idUser/");
       var inputProfil = json.encode({
         "full_name": fullNameController.text,
@@ -131,16 +136,20 @@ class ProfileController extends GetxController with StateMixin {
             picName.value = response['data']['full_name'];
             var user = User.fromJson(response['data']);
             loginC.getStorage.write('user', user.toJson());
+            isLoading(false);
             _snack("Edit Berhasil", "Data profil berhasil diedit", "suc");
             update();
             Get.offAllNamed(Routes.HOME, arguments: 2);
           } else {
+            isLoading(false);
             _snack("Edit Gagal", "Data profil gagal diedit", "err");
           }
         } else {
+          isLoading(false);
           _snack("Edit Gagal", "Data profil gagal diedit", "err");
         }
       }).catchError((err) {
+        isLoading(false);
         _snack("Edit Gagal", "$err", "err");
       });
     }

@@ -1,4 +1,26 @@
 {
-    "id": 16,
-    "car": 6
+    "id": 51,
+    "customer": 1,
+    "start_date": "2023-08-27",
+    "end_date": "2023-08-28",
+    "check_out_date": null,
+    "total_days": 1,
+    "status": "pending",
+    "total_cost": 300000,
+    "late_fee": 0,
+    "total_payment": 300000,
+    "car": {
+        "id": 6,
+        "name": "Nissan Altima",
+        "car_type": "Sedan",
+        "price": 300000,
+        "color": "White",
+        "transmission": "manual",
+        "license_plate": "JKL202",
+        "passenger_capacity": 5,
+        "fuel_capacity": "62.30",
+        "description": "A reliable and fuel-efficient sedan.",
+        "picture": "https://ilhamdean.pythonanywhere.com/image/automobile-176989_640.jpg",
+        "is_booked": true
+    }
 }
