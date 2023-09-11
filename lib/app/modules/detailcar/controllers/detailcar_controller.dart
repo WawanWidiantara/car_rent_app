@@ -164,7 +164,7 @@ class DetailcarController extends GetxController {
   }
 
   launchURL() async {
-    final Uri url = Uri.parse('https://flutter.dev');
+    final Uri url = Uri.parse('https://maps.app.goo.gl/dPCNbpQ4M6dBV4ju9');
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }
