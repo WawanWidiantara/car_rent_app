@@ -59,7 +59,8 @@ class AktifView extends GetView {
                                         )
                                       : InkWell(
                                           onTap: () {
-                                            Get.to(() => DetailRiwayatView(),
+                                            Get.to(
+                                                () => const DetailRiwayatView(),
                                                 arguments: [
                                                   riwayatC
                                                       .activeHistoryList[index]

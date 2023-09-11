@@ -29,6 +29,7 @@ class RiwayatController extends GetxController
   var finishHistoryList = <Rent>[].obs;
   var idSingleCar = 0.obs;
   var singleHistory = {}.obs;
+  var nullSingleHistory = {}.obs;
 
   @override
   void onInit() {
@@ -55,8 +56,25 @@ class RiwayatController extends GetxController
     super.onClose();
   }
 
+  _snack(String title, String conntent, String tipe) {
+    Get.snackbar(title, conntent,
+        snackPosition: SnackPosition.TOP,
+        colorText: Colors.white,
+        duration: const Duration(seconds: 2),
+        backgroundColor: tipe == "err" ? Colors.red : Colors.green);
+  }
+
+  makeEmptySingleHistory() {
+    singleHistory.value = nullSingleHistory.value;
+    update();
+  }
+
   Future fetchHistory(String status) async {
-    var url = Uri.parse("${UrlApi.baseAPI}/api/rentals/?status=$status");
+    final userData = loginC.getStorage.read('user');
+    final idUser = userData['id'];
+
+    var url = Uri.parse(
+        "${UrlApi.baseAPI}/api/rentals/?customer=$idUser&status=$status");
     final response = await http.get(url, headers: {
       'Authorization': 'Token ${loginC.getStorage.read("token")}',
     });
@@ -86,7 +104,7 @@ class RiwayatController extends GetxController
         update();
       }
     } else {
-      print(response.reasonPhrase);
+      _snack("Error", "${response.reasonPhrase}", "err");
     }
   }
 
@@ -98,10 +116,9 @@ class RiwayatController extends GetxController
     if (response.statusCode == 200) {
       var result = json.decode(response.body);
       singleHistory.value = result['data'];
-      print(singleHistory.value['car']['name'].toString());
       update();
     } else {
-      print(response.reasonPhrase);
+      _snack("Error", "${response.reasonPhrase}", "err");
     }
   }
 }

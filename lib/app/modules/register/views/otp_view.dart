@@ -52,7 +52,7 @@ class OtpView extends GetView {
                   child: const Text("Submit"),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text.rich(

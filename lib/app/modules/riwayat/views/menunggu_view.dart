@@ -59,7 +59,8 @@ class MenungguView extends GetView {
                                         )
                                       : InkWell(
                                           onTap: () {
-                                            Get.to(() => DetailRiwayatView(),
+                                            Get.to(
+                                                () => const DetailRiwayatView(),
                                                 arguments: [
                                                   riwayatC
                                                       .pendingHistoryList[index]

@@ -16,6 +16,7 @@ class DetailRiwayatView extends GetView {
           backgroundColor: Colors.white,
           leading: IconButton(
             onPressed: () {
+              riwayatC.makeEmptySingleHistory();
               Get.back(closeOverlays: true);
             },
             icon: const Icon(

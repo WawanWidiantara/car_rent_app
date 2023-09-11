@@ -458,7 +458,7 @@ class RegisterDetailView extends GetView<RegisterController> {
                     ),
                     const SizedBox(height: 50),
                     controller.isLoading.value == true
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : SizedBox(
                             width: double.infinity,
                             height: 60,

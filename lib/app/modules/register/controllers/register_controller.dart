@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unnecessary_overrides
 
 import 'dart:convert';
 import 'dart:io';
@@ -258,7 +258,7 @@ class RegisterController extends GetxController {
       http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
-        var data = await response.stream.bytesToString;
+        // var data = await response.stream.bytesToString;
         _snack(
             "Berhasil Mendaftar",
             "Data anda berhasil didaftarkan, masukkan otp untuk verifikasi akun",

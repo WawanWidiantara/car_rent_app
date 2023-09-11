@@ -60,7 +60,8 @@ class SelesaiView extends GetView {
                                             const EdgeInsets.only(bottom: 10),
                                         child: InkWell(
                                           onTap: () {
-                                            Get.to(() => DetailRiwayatView(),
+                                            Get.to(
+                                                () => const DetailRiwayatView(),
                                                 arguments: [
                                                   riwayatC
                                                       .finishHistoryList[index]

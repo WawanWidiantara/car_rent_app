@@ -144,7 +144,7 @@ class LoginView extends GetView<LoginController> {
                       height: 60,
                     ),
                     controller.isLoading.value == true
-                        ? CircularProgressIndicator()
+                        ? const CircularProgressIndicator()
                         : SizedBox(
                             width: 340,
                             child: SizedBox(

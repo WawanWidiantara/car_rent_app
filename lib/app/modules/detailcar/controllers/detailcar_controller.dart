@@ -18,7 +18,7 @@ class DetailcarController extends GetxController {
   final loginC = Get.put(LoginController());
   var idCar = Get.arguments;
   var carsDetail = {}.obs;
-  var isLoading = true.obs;
+  RxBool isLoading = false.obs;
   var isError = false.obs;
   var errmsg = "".obs;
 
@@ -63,7 +63,6 @@ class DetailcarController extends GetxController {
   }
 
   Future fetchCarsDetailData() async {
-    isLoading(false);
     try {
       var url = Uri.parse("${UrlApi.baseAPI}/api/cars/$idCar/");
       http.get(url, headers: {
@@ -82,8 +81,6 @@ class DetailcarController extends GetxController {
         }
       });
     } catch (e) {
-      isLoading(false);
-      isError(true);
       errmsg(e.toString());
       throw Exception(e);
     }
@@ -174,6 +171,7 @@ class DetailcarController extends GetxController {
   }
 
   klikPesanSekarang(int idCar, BuildContext context) {
+    isLoading(true);
     final userData = loginC.getStorage.read('user');
     final idUser = userData['id'];
 
@@ -198,8 +196,8 @@ class DetailcarController extends GetxController {
         var response = json.decode(res.body);
         if (response['success'] == 1) {
           var idInvoice = response['data']['id'];
-          print(idInvoice);
           update();
+          isLoading(false);
           Get.offAllNamed(Routes.HOME);
           return showDialog(
               context: context,
@@ -259,7 +257,8 @@ class DetailcarController extends GetxController {
                                                       BorderRadius.circular(
                                                           10)))),
                                       onPressed: () {
-                                        Get.to(() => DetailRiwayatView(),
+                                        Get.back();
+                                        Get.to(() => const DetailRiwayatView(),
                                             arguments: [idInvoice, 'pending']);
                                       },
                                       child: const Text("Lihat Pesanan")),
@@ -276,13 +275,16 @@ class DetailcarController extends GetxController {
                 );
               });
         } else {
+          isLoading(false);
           _snack("Login Invalid", "Email dan Password tidak sesuai", "err");
         }
       } else {
+        isLoading(false);
         _snack("Error", "Error status code ${res.statusCode}", "err");
       }
       // ignore: body_might_complete_normally_catch_error
     }).catchError((err) {
+      isLoading(false);
       _snack("Login Invalid", "$err", "err");
     });
   }

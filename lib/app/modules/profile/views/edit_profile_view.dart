@@ -34,7 +34,7 @@ class EditProfileView extends GetView {
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
+                    const Center(
                       child: Text(
                         "Edit Profile",
                         style: TextStyle(
@@ -91,11 +91,13 @@ class EditProfileView extends GetView {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorsRentals.cPrimary),
+                          borderSide:
+                              const BorderSide(color: ColorsRentals.cPrimary),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorsRentals.cPrimary),
+                          borderSide:
+                              const BorderSide(color: ColorsRentals.cPrimary),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -134,11 +136,13 @@ class EditProfileView extends GetView {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorsRentals.cPrimary),
+                          borderSide:
+                              const BorderSide(color: ColorsRentals.cPrimary),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorsRentals.cPrimary),
+                          borderSide:
+                              const BorderSide(color: ColorsRentals.cPrimary),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -220,11 +224,13 @@ class EditProfileView extends GetView {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorsRentals.cPrimary),
+                          borderSide:
+                              const BorderSide(color: ColorsRentals.cPrimary),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorsRentals.cPrimary),
+                          borderSide:
+                              const BorderSide(color: ColorsRentals.cPrimary),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -246,12 +252,6 @@ class EditProfileView extends GetView {
                       readOnly: true,
                       autofocus: false,
                       controller: controller.genderController,
-                      onSaved: (value) {
-                        // controller.fullName = value!;
-                      },
-                      validator: (value) {
-                        // return controller.validateEmail(value!);
-                      },
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -294,12 +294,6 @@ class EditProfileView extends GetView {
                       readOnly: true,
                       autofocus: false,
                       controller: controller.dobController,
-                      onSaved: (value) {
-                        // controller.fullName = value!;
-                      },
-                      validator: (value) {
-                        // return controller.validateEmail(value!);
-                      },
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -325,16 +319,17 @@ class EditProfileView extends GetView {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     controller.isLoading.value == true
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : SizedBox(
                             width: double.infinity,
                             height: 50,
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      ColorsRentals.cPrimary),
+                                  backgroundColor:
+                                      const MaterialStatePropertyAll(
+                                          ColorsRentals.cPrimary),
                                   shape: MaterialStatePropertyAll<
                                           RoundedRectangleBorder>(
                                       RoundedRectangleBorder(

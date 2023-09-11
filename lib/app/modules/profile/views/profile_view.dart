@@ -264,12 +264,6 @@ class ProfileView extends GetView<ProfileController> {
                     readOnly: true,
                     autofocus: false,
                     controller: controller.genderController,
-                    onSaved: (value) {
-                      // controller.fullName = value!;
-                    },
-                    validator: (value) {
-                      // return controller.validateEmail(value!);
-                    },
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black,
@@ -312,12 +306,6 @@ class ProfileView extends GetView<ProfileController> {
                     readOnly: true,
                     autofocus: false,
                     controller: controller.dobController,
-                    onSaved: (value) {
-                      // controller.fullName = value!;
-                    },
-                    validator: (value) {
-                      // return controller.validateEmail(value!);
-                    },
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black,
@@ -345,7 +333,10 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   const SizedBox(height: 30),
                   controller.isLoading.value == true
-                      ? Center(child: CircularProgressIndicator())
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                          color: ColorsRentals.cRed,
+                        ))
                       : SizedBox(
                           width: double.infinity,
                           height: 50,

@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:car_rent_app/app/modules/riwayat/views/aktif_view.dart';
 import 'package:car_rent_app/app/modules/riwayat/views/menunggu_view.dart';
 import 'package:car_rent_app/app/modules/riwayat/views/selesai_view.dart';
@@ -15,10 +17,6 @@ class RiwayatView extends GetView<RiwayatController> {
     final _tabC = Get.put(RiwayatController());
     return SafeArea(
       child: Scaffold(
-          // appBar: AppBar(
-          //   title: const Text('RiwayatView'),
-          //   centerTitle: true,
-          // ),
           body: Column(
         children: [
           const SizedBox(
